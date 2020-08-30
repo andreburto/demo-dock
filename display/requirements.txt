@@ -1,0 +1,6 @@
+# If this weren't a demo, these would be pegged to specific versions.
+beautifulsoup4
+flask
+pymysql
+requests
+uwsgi

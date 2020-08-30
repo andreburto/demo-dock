@@ -1,0 +1,15 @@
+FROM python:3.7-alpine
+
+WORKDIR /display
+
+COPY ./display /display
+
+# Install any needed packages specified in requirements.txt
+RUN apk update && \
+    apk add --no-cache make gcc g++ libgcc libstdc++ linux-headers python3-dev && \
+    pip install --upgrade pip && \
+    pip install -r /display/requirements.txt && \
+    rm -Rf /tmp/* && \
+    rm -Rf /root/.cache/*
+
+CMD ["uwsgi", "--http", ":8000", "--manage-script-name", "--mount", "/=display:app"]
